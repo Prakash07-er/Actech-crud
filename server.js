@@ -2,9 +2,11 @@ require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
 const catalogRouter = require("./Routes/catalogRoute")
+const cors = require('cors')
 
 const app = express();
-app.use(express.json()) 
+app.use(express.json());
+app.use(cors())
 
 // local server connection
 const port = process.env.port || 5000

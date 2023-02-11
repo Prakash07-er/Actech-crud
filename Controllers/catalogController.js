@@ -1,4 +1,3 @@
-const { trusted } = require('mongoose')
 const catalogData = require('../Models/catalogModal')
 // const mongoose = require('mongoose')
 
@@ -7,11 +6,21 @@ const catalogController = {
         try {  
             const {code, name, description, category, brand, price} = req.body
 
-            const uniqueCode = await catalogData.findOne({code})
-            if(uniqueCode) return res.status(400).json({msg: "Code is already exist"})
+            const formErrors = []
 
-            const uniqueName = await catalogData.findOne({name})
-            if(uniqueName) return res.status(400).json({msg: "Name is already exist"})
+            if(!code && !name) return res.status(400).json({msg: "Please make sure to add code and name fields"})
+
+            // if(!code ) return res.status(400).json({msg: "Please fill code fields"})
+            // if(!name) return res.status(400).json({msg: "Please fill name fields"})
+
+            // const code_name = await catalogData.find({code, name})
+            // if(code_name ) return res.status(400).json({msg: "Code and name is already exist"})
+            
+            // const uniqueCode = await catalogData.findOne({code})
+            // if(uniqueCode) return res.status(400).json({msg: "Code is already exist"})
+
+            // const uniqueName = await catalogData.findOne({name})
+            // if(uniqueName) return res.status(400).json({msg: "Name is already exist"})
 
             const data = await catalogData({
                 code, name, description, category, brand, price
@@ -22,6 +31,7 @@ const catalogController = {
            
         } catch (error) {
             console.log(error)
+
             res.status(500).json({msg: "Something went wrong"})
         }
     },
@@ -54,7 +64,7 @@ const catalogController = {
     },
     deleteCatalog: async(req,res)  => {
         try {  
-            const data = await catalogData.findOneAndDelete({_id:req.params.id})
+            await catalogData.findOneAndDelete({_id:req.params.id})
 
             res.status(200).json({msg: "Requested data deleted"})
            
