@@ -4,17 +4,13 @@ import AddData from "./components/addData";
 import { Routes,  Route, useNavigate} from "react-router-dom";
 import Dashboard from "./components/dashboard";
 import UpdateData from "./components/update";
+import Navbar from "./components/navbar";
 
 
 function App() {
 
-  // const updateData = async () => {
-  //   const response = await axios.get("http://localhost:5000/api/update-catalog/:${id}");
-  //   console.log("response", response.data.Data);
-  //   setUpdateData(response.data.Data);
-  // };
-
-  return (
+  return (<>
+    <Navbar />
     <div class="container-md">
       <Routes>
          <Route path="/" element={<Dashboard />} />
@@ -22,6 +18,7 @@ function App() {
          <Route path="/update-data/:id" element={<AddData />} />
       </Routes>
     </div>
+    </>
   );
 }
 

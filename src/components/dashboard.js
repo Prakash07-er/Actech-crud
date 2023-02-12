@@ -19,12 +19,9 @@ const Dashboard = () => {
       getData();
     }, []);
 
-    // const {id} = useParams()
-    // console.log(id)
-
     const deleteData = async (id) => {
-        await axios.delete(`http://localhost:5000/api/delete-catalog/:${id}`);
-        console.log("Data deleted");
+        await axios.delete(`http://localhost:5000/api/delete-catalog/${id}`);
+        window.location.reload(false)
     };
     const addData = async () => {
         navigate('/add-data')
@@ -36,7 +33,9 @@ const Dashboard = () => {
 
   return (
     <div class="container-md">
-    <button type="submit" className="btn btn-primary" onClick={addData}>Add Data</button>
+    <div className='text-center' style={{padding: "20px 20px"}}>
+      <button type="submit" className="btn btn-primary" onClick={addData}>Add Data</button>
+    </div>
     <table class="table">
       <thead>
         <tr>

@@ -34,7 +34,7 @@ const AddData = () => {
 
     return (
         <div class="container-md-6">
-            <h3>Add Catalog data</h3>
+            <h3>{id ? "Update Catelog data" : "Add Catalog data"}</h3>
             <form onSubmit={id ? updateData : addData} >
                 {id ? ""
                     : (<> <div class="mb-3">
@@ -62,7 +62,7 @@ const AddData = () => {
                     <label for="exampleInputPassword1" className="form-label">Price</label>
                     <input type="number" className="form-control" value={data?.price} onChange={(e) => setData({ ...data, price: e.target.value })} />
                 </div>
-                <button type="submit" className="btn btn-primary">Add</button>
+                <button type="submit" className="btn btn-primary">{id ? "Update" : "Add"}</button>
             </form>
         </div>
     )
