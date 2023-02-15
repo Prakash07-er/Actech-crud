@@ -5,6 +5,8 @@ router.post('/create-catalog', catalogController.createCatalog)
 
 router.get('/read-catalog', catalogController.reactCatalog)
 
+router.get('/single-catalog/:id', catalogController.singleCatalog)
+
 router.put('/update-catalog/:id', catalogController.updateCatalog)
 
 router.delete('/delete-catalog/:id', catalogController.deleteCatalog)
