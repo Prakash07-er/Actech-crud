@@ -59,8 +59,8 @@ const AddData = () => {
       console.log(response.data.msg)
       navigate("/");
     } catch (error) {
-      console.log(error.response)
-      setError(error.response.data) 
+      console.log(error.response.data.validationError)
+      setError(error.response.data.validationError) 
     }
     // console.log(error)
   };
@@ -86,7 +86,7 @@ const AddData = () => {
                 : setData({ ...data, code: e.target.value })
             }
           />
-        {/* {error.code ? (<div style={{color:"red"}}> *{error}</div>) : ''} */}
+        {error ? (<div style={{color:"red"}}> {error.code}</div>) : ''}
         </div>
         <div className="mb-3">
           <label className="form-label">Name</label>
@@ -101,8 +101,8 @@ const AddData = () => {
                 : setData({ ...data, name: e.target.value })
             }
           />
-          {/* {error.name ? (<div style={{color:"red"}}> *{error}</div>) : ''} */}
         </div>
+        {error ? (<div style={{color:"red"}}> {error.name}</div>) : ''}
         <div className="mb-3">
           <label className="form-label">Description</label>
           <input
@@ -131,6 +131,7 @@ const AddData = () => {
             }
           />
         </div>
+        {error ? (<div style={{color:"red"}}> {error.category}</div>) : ''}
         <div className="mb-3">
           <label className="form-label">Brand</label>
           <input
@@ -145,6 +146,7 @@ const AddData = () => {
             }
           />
         </div>
+        {error ? (<div style={{color:"red"}}> {error.brand}</div>) : ''}
         <div className="mb-3">
           <label className="form-label">Price</label>
           <input
@@ -159,6 +161,7 @@ const AddData = () => {
             }
           />
         </div>
+        {error ? (<div style={{color:"red"}}> {error.price}</div>) : ''}
         <button type="submit" className="btn btn-primary">
           {id ? "Update" : "Add"}
         </button>
