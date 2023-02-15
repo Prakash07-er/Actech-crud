@@ -30,27 +30,10 @@ const catalogController = {
         if(uniqueName) {
           validation.name = "Name is already exist"
         }
-        res.status(500).json({ msg: "Something went wrong" , validationError: validation});
 
-        console.log("validation", validation)
-
-        // if (!code || !name || !category || !brand || !price)
-
-        // var isValid = {
-    
-        // };
-        
-        // const uniqueCode = await catalogData.findOne({code})
-        // if(uniqueCode) return res.status(400).json({code: "Code is already exist"})
-        
-        // const uniqueName = await catalogData.findOne({name})
-        // if(uniqueName) return res.status(400).json({name: "Name is already exist"})
-        
-
-        // const code_name = await catalogData.find({code, name})
-        // if(code_name ) return res.status(400).json({msg: "Code and name is already exist"})
-    
-     
+        if(Object.keys(validation).length >0)
+         return res.status(500).json({ validationError: validation});
+         
 
       const data = await catalogData({
         code,
@@ -63,9 +46,10 @@ const catalogController = {
 
       const allData = await data.save();
       res.status(200).json({ allData: allData });
+
     } catch (error) {
+        res.status(500).json({ msg: "Something went wrong" });
       console.log(error);
-      res.status(500).json({ msg: "Something went wrong" });
     }
   },
   reactCatalog: async (req, res) => {
@@ -81,26 +65,10 @@ const catalogController = {
     try {
       const { code, name, description, category, brand, price } = req.body;
 
-      // const findId = await catalogData.findById({ _id: req.params.id });
-      // console.log("findId", findId._id);
-
-      // const { id } = req.params;
-      // console.log("id:", id);
-      // const result = mongoose.Types.ObjectId(id.toString().trim());
-      // console.log("res:", result);
-
-
-      //  var test = await catalogData.exists({ _id:findId._id });
-      //  if (!test)  return res.status(404).json({ msg: "Products not found" });
+      const findId = await catalogData.findById({ _id: req.params.id });
       
-      // console.log("test", test);
-
-      // const { id } = req.params;
-      // console.log("id:", id);
-      // const findId = await catalogData.findById({id});
-      // if (!mongoose.Types.ObjectId.isValid(findId))
-      //     return res.status(404).json({ msg: "Products not found"});
-
+      if (!findId)  return res.status(404).json({ msg: "Products not found" });
+      
       const data = await catalogData.findOneAndUpdate(
         { _id: req.params.id },
         {
